@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login
-from .forms import ContactForm, LoginForm
+from .forms import ContactForm, LoginForm, RegisterForm
 from django.shortcuts import render, redirect
 
 
@@ -60,4 +60,10 @@ def login_form(request):
 
 
 def register_form(request):
-    return render(request, "auth/register.html", {})
+    form = RegisterForm(request.POST or None)
+    context = {
+        "form": form
+    }
+    if form.is_valid():
+        print(form.cleaned_data)
+    return render(request, "auth/register.html", context)
