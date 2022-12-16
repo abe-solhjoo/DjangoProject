@@ -1,4 +1,7 @@
 from django import forms
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class ContactForm(forms.Form):
@@ -31,6 +34,9 @@ class RegisterForm(forms.Form):
     userName = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your user name'})
     )
+    email = forms.CharField(
+        widget=(forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'}))
+    )
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter your password'})
     )
@@ -38,6 +44,19 @@ class RegisterForm(forms.Form):
         label='Confirm password',
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter your password'})
     )
+
+    def clean_userName(self):
+        userName = self.cleaned_data.get("userName")
+        qs = User.objects.filter(username=userName)
+        if qs.exists():
+            raise forms.ValidationError("The username is taken")
+        return userName
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        qs = User.objects.filter(email=email)
+        if qs.exists():
+            raise forms.ValidationError("The email is taken")
 
     def clean(self):
         data = self.cleaned_data
