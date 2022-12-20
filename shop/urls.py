@@ -18,6 +18,7 @@ from django.urls import path
 from .views import home_page, about_us, contact_page, login_form, register_form
 from django.conf import settings
 from django.conf.urls.static import static
+from products.views import ProductListView, ProductDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,7 +26,9 @@ urlpatterns = [
     path('about-us', about_us),
     path('contact-us', contact_page),
     path('login', login_form),
+    path('products', ProductListView.as_view()),
     path('register', register_form),
+    path('products/<pk>', ProductDetailView.as_view()),
 ]
 
 if settings.DEBUG:
