@@ -5,7 +5,19 @@ from .models import Product
 from django.http import Http404
 
 
-# Create your views here.
+class ProductFeaturedListView(ListView):
+    template_name = "products/product_list.html"
+
+    def get_queryset(self):
+        return Product.objects.get_featured()
+
+
+class ProductFeaturedDetailView(DetailView):
+    template_name = "products/product_featured_detail.html"
+
+    def get_queryset(self):
+        return Product.objects.get_featured()
+
 
 class ProductListView(ListView):
     queryset = Product.objects.all()
@@ -29,6 +41,7 @@ class ProductDetailView(DetailView):
 
     def get_object(self, *args, **kwargs):
         request = self.request
+        # print('test', request)
         productId = self.kwargs.get('pk')
         product = Product.objects.get_by_id(productId)
         if product is None:
