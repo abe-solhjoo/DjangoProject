@@ -22,6 +22,9 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/', null=True, blank=True)
     active = models.BooleanField(default=False)
 
+    def get_absolute_url(self):
+        return f"/products/{self.slug}"
+
     objects = ProductManager()
 
     def __str__(self):

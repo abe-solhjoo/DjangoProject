@@ -28,7 +28,7 @@
                     <h3>{{ product.title }}</h3>
                     <p>{{ product.description }}</p>
                     <p>
-                        <a href="/products/{{product.id}}" class="btn btn-primary btn-block" role="button">show product</a>
+                        <a href="{{product.get_absolute_url}}" class="btn btn-primary btn-block" role="button">show product</a>
                     </p>
                 </div>
             </div>
