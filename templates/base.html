@@ -8,9 +8,8 @@
     {% include "base/css.html" %}
 </head>
 <body>
-{% include "base/navbar.html" %}
+{% include "base/navbar.html" with brand_name="Eshop" %}
 {% block content %}{% endblock %}
-
 {% include "base/js.html" %}
 </body>
 </html>
