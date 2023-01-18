@@ -26,7 +26,7 @@ urlpatterns = [
     path('contact-us', contact_page),
     path('login', login_form),
     path('register', register_form),
-    path('products/', include("products.urls"))
+    path('products/', include("products.urls", namespace="products"))
 ]
 
 if settings.DEBUG:

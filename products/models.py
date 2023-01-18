@@ -1,6 +1,7 @@
 from django.db import models
 from .utils import unique_slug_generator
 from django.db.models.signals import pre_save
+from django.urls import reverse
 
 
 class ProductManager(models.Manager):
@@ -23,7 +24,8 @@ class Product(models.Model):
     active = models.BooleanField(default=False)
 
     def get_absolute_url(self):
-        return f"/products/{self.slug}"
+        # return f"/products/{self.slug}"
+        return reverse("products:detail", kwargs={"slug": self.slug})
 
     objects = ProductManager()
 

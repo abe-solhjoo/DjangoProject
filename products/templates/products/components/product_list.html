@@ -8,7 +8,7 @@
         <p>
             <a href="{{ product.get_absolute_url }}" class="btn btn-primary btn-block" role="button">show
                 product</a>
-            <a href="{% url 'ProductDetail' slug=product.slug %}" class="btn btn-warning btn-block" role="button">show
+            <a href="{% url 'products:detail' slug=product.slug %}" class="btn btn-warning btn-block" role="button">show
                 product</a>
         </p>
     </div>
